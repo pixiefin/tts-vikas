@@ -41,11 +41,8 @@ def handleWord(word):
     
 def processMessage(msg):
     tokenized = msg.split()
-    if len(tokenized) == 1 :
-        handleWord(tokenized[0])
-    else :
-        for word in tokenized:
-            handleWord(word)
+    for word in tokenized:
+        handleWord(word)
 
 if __name__ == '__main__':
     eventlet.wsgi.server(eventlet.listen(('', 9069)), app)
