@@ -22,8 +22,8 @@ def handleProcessedEvent(msg):
 def connect_server():
     sio.connect('https://tts-vikas.msriva.com')
 
-def send_msg():
-    sio.emit('text_msg', 'This is a test')
+def send_msg(msg):
+    sio.emit('text_msg', msg)
 
 if __name__ == '__main__':
     try:
@@ -32,5 +32,5 @@ if __name__ == '__main__':
         pass
 
     connect_server()
-    send_msg()
+    send_msg("This is a test")
     sio.wait()
