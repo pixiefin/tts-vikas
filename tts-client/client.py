@@ -11,18 +11,6 @@ def connect():
 def disconnect():
     print('Disconnected from server')
 
-@sio.event
-def srv_ack(data):
-    print('Message from server: ', data)
-
-@sio.on('text_event')
-def handleWord(msg):
-    print('Text Message : ', msg)
-
-@sio.on('audio_event')
-def handleAudio(msg):
-    print('Saving audio ..')
-
 @sio.on('processed_event')
 def handleProcessedEvent(msg):
     print('Saving audio ..')

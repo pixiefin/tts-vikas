@@ -38,8 +38,6 @@ def handleWord(word, process=True):
         'text_event':  word
     }
     sio.emit('processed_event', response)
-    #sio.emit('audio_event', speech)
-    #sio.emit('text_event', word)
     
 def processMessage(msg):
     tokenized = msg.split()
