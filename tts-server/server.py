@@ -31,7 +31,7 @@ def convertToSpeech(msg):
     audio_byte_stream.seek(0)
     return audio_byte_stream.getvalue()
 
-def handleWord(word, process=True):
+def handleWord(word):
     speech = convertToSpeech(word)
     response = {
         'audio_event' : speech,
