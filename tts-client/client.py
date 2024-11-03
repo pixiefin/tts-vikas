@@ -23,14 +23,15 @@ def connect_server():
     sio.connect('https://tts-vikas.msriva.com')
 
 def send_msg(msg):
-    sio.emit('text_msg', msg)
+    sio.call('text_msg', msg)
 
 if __name__ == '__main__':
     try:
         os.makedirs('mp3')
     except OSError:
         pass
-
     connect_server()
-    send_msg("This is a test")
-    sio.wait()
+
+    while (True):
+        msg = input("Enter Text --> ")
+        send_msg(msg)
