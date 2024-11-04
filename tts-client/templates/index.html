@@ -29,7 +29,7 @@
             socket.emit('local_msg', msg);
         }
 
-        // Emit to Local Server WS -- Add Rooms and Namespace Later
+        // Set Status on this page
         function setCurrentStatus(msg) {
             var status = document.getElementById('status');
             var prevVal = status.value
