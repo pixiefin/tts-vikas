@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TTS Client</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
+    <script type="text/javascript">
+
+        // Connect to Local Sever WS Serving this Page
+        var socket = io("ws://localhost:9096");
+
+        // Event Listeners for this Socket
+        document.addEventListener('DOMContentLoaded', (event) => {
+            socket.on('connect', function() {
+                setCurrentStatus('This Web Client is now connected to the local server')
+            }); 
+ 
+            socket.on('disconnect', function() {
+                setCurrentStatus('This Web Client is disconnected from local server')
+            });
+
+            socket.on('local_events', function(msg) {
+                setCurrentStatus(msg)
+            });
+        });
+
+        // Emit to Local Server WS -- Add Rooms and Namespace Later
+        function sendMessage() {
+            var msg = document.getElementById('message').value;
+            socket.emit('local_msg', msg);
+        }
+
+        // Emit to Local Server WS -- Add Rooms and Namespace Later
+        function setCurrentStatus(msg) {
+            var status = document.getElementById('status');
+            var prevVal = status.value
+            status.value = prevVal + '\n' + msg
+        }
+
+        
+    </script>
+</head>
+<body>
+    <input type="text" id="message">
+    <button onclick="sendMessage()">Send</button>
+    <br>
+    <br>
+    <h2>Logs : </h2>
+    <textarea name="status" id="status" rows="50", cols="100"></textarea>
+</body>
+</html>
