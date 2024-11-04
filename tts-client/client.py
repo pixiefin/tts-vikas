@@ -15,12 +15,12 @@ FLASK_APP_SECERT_KEY = 'SECRET_KEY'
 FLASK_APP_SECERT_VAL = '#some_sec_val#'
 
 # File Vars
-FILENAME_PREFIX = './'
-FILENAME_SUFFIX = '/'
+FILENAME_SUFFIX = '\\'
+FILENAME_PREFIX = os.getcwd()
 FILE_SAVE_MODE = 'wb'
 AUDIO_BASE_FOLDER = 'mp3'
 AUDIO_BASE_EXTENSION = '.mp3'
-FULL_FILE_PATH = FILENAME_PREFIX + AUDIO_BASE_FOLDER + FILENAME_SUFFIX
+FULL_FILE_PATH = FILENAME_PREFIX + FILENAME_SUFFIX + AUDIO_BASE_FOLDER + FILENAME_SUFFIX
 
 # Standard Notifications/Logs
 CONN_TO_TTS_SERVER  = 'Local Server Connected to TTS-Server'
@@ -108,8 +108,9 @@ def notifyWebClient(msg):
 
 if __name__ == '__main__':
     try:
-        os.makedirs(AUDIO_BASE_FOLDER)
+        os.makedirs(FILENAME_PREFIX + FILENAME_SUFFIX + AUDIO_BASE_FOLDER)
     except OSError:
+        print(FILENAME_PREFIX + FILENAME_SUFFIX + AUDIO_BASE_FOLDER + "folder already existing")
         pass
     connect_server()
     eventlet.wsgi.server(eventlet.listen(('', LOCAL_SERVER_PORT)), app)
